@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "psmpredict"
+version = "0.1.0"
+description = "GPU-ready peptide MS/MS spectrum prediction from MaxQuant msms.txt"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Animesh Sharma"}]
+dependencies = ["numpy>=1.24", "pandas>=2.0", "pyarrow>=14", "pyyaml>=6", "tqdm>=4.66"]
+
+[project.scripts]
+psmpredict = "psmpredict.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
