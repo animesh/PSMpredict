@@ -126,7 +126,7 @@ def collate(batch):
     charge = torch.zeros(b, dtype=torch.long); target = torch.zeros(b, length - 1, c); cut_mask = torch.zeros(b, length - 1, dtype=torch.bool)
     for i, r in enumerate(batch):
         n = len(r["sequence"]); aa[i,:n] = torch.tensor([AA_TO_ID[a] for a in r["sequence"]]); mods[i,:n] = torch.as_tensor(r["mod_mass"])
-        mask[i,:n] = False; charge[i] = min(max(int(r["charge"]), 1), 8); target[i,:n-1] = torch.as_tensor(r["target"]); cut_mask[i,:n-1] = True
+        mask[i,:n] = False; charge[i] = min(max(int(r["charge"]), 1), 8); target[i,:n-1] = torch.as_tensor(r["target"]) if "target" in r else 0; cut_mask[i,:n-1] = True
     return aa, mods, charge, mask, target, cut_mask
 
 class SpectrumTransformer(nn.Module):
